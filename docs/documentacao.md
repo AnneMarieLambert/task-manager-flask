@@ -67,6 +67,8 @@ O KanbanTasker segue o padrão de arquitetura **MVC (Model-View-Controller)** ad
 
 ## 3. Gestão e Decisões de Metodologia Ágil (Kanban)
 
+
+
 A equipe optou pelo framework ágil **Kanban** em substituição ao Scrum rígido por se alinhar melhor ao desenvolvimento contínuo de projetos de menor porte:
 
 1.  **Limitação de Trabalho em Progresso (WIP - Work in Progress)**:
