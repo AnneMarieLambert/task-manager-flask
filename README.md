@@ -83,7 +83,7 @@ Dessa forma, foi aprovada uma **Mudança de Escopo oficial** para incorporar a f
 
 ---
 
-## ⚙️ Explicação do Sistema (Como Funciona)
+##  Explicação do Sistema (Como Funciona)
 A aplicação funciona como um sistema completo de gerenciamento de tarefas (CRUD):
 *   **Criar Tarefa**: Permite registrar título, descrição rica, prioridade e coluna inicial.
 *   **Listar Tarefas**: O dashboard divide as tarefas criadas dinamicamente entre as 3 colunas ágeis.
