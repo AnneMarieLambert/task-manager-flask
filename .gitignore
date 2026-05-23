@@ -1,25 +1,26 @@
-# Cache do Python
+
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Ambientes virtuais
+
 .venv/
 venv/
 ENV/
 
-# Banco de dados SQLite local
+
 *.db
 *.sqlite
 instance/
 
-# Cache de testes
+
+
 .pytest_cache/
 .coverage
 htmlcov/
 
-# Editores e IDEs
+
 .vscode/
 .idea/
 *.suo
@@ -28,6 +29,6 @@ htmlcov/
 *.sln
 *.swp
 
-# Sistema operacional
+
 .DS_Store
 Thumbs.db

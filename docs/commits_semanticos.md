@@ -1,9 +1,3 @@
-# Guia de Commits Semânticos (Histórico Git Sugerido)
-
-Para demonstrar maturidade técnica e boas práticas de Engenharia de Software no desenvolvimento do projeto, este documento sugere um histórico sequencial de **10 commits semânticos** baseados na convenção **Conventional Commits**.
-
----
-
 ## 1. O que são Commits Semânticos?
 Commits semânticos são mensagens de commit estruturadas de forma padronizada para indicar claramente o *propósito* da alteração efetuada no código. O padrão básico utilizado é:
 `tipo(escopo): descrição sucinta`

@@ -11,34 +11,33 @@ def create_app(test_config=None):
     Configura e inicializa a aplicação Flask, definindo os caminhos corretos de
     templates e arquivos estáticos localizados fora do subdiretório 'src/'.
     """
-    # Como 'app.py' está localizado dentro de '/src', configuramos explicitamente
-    # a pasta de templates e arquivos estáticos no nível da raiz do projeto.
+    
     app = Flask(
         __name__,
         template_folder=os.path.join(os.path.dirname(os.path.dirname(__file__)), 'templates'),
         static_folder=os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static')
     )
     
-    # Configurações padrão do sistema
+    
     app.config.from_mapping(
         SECRET_KEY='engenharia-de-software-super-secreta',
         DATABASE=os.path.join(os.path.dirname(os.path.dirname(__file__)), 'instance', 'tasks.db'),
     )
     
-    # Se houver configuração de teste (ex: injetada pelo Pytest), ela sobrescreve o padrão
+    
     if test_config is not None:
         app.config.from_mapping(test_config)
         
-    # Garante que o diretório da instância (onde o SQLite reside) seja criado
+    
     try:
         os.makedirs(app.instance_path)
     except OSError:
         pass
         
-    # Registra o encerramento do banco de dados na desmontagem da requisição Flask
+    
     app.teardown_appcontext(close_db_connection)
     
-    # --- ROTAS DA APLICAÇÃO ---
+   
     
     @app.route('/')
     def index():
@@ -48,14 +47,14 @@ def create_app(test_config=None):
         """
         tasks = get_all_tasks()
         
-        # Estrutura do Kanban com 3 colunas padrão
+
         kanban = {
             'A Fazer': [],
             'Em Progresso': [],
             'Concluído': []
         }
         
-        # Organiza as tarefas em suas respectivas colunas
+        
         for task in tasks:
             status = task['status']
             if status in kanban:
@@ -78,7 +77,7 @@ def create_app(test_config=None):
             status = request.form['status']
             
             error = None
-            # Validação básica de regras de negócio
+            
             if not title:
                 error = 'O título da tarefa é obrigatório!'
             elif priority not in ('Alta', 'Média', 'Baixa'):
@@ -160,15 +159,15 @@ def create_app(test_config=None):
     return app
 
 if __name__ == '__main__':
-    # Ponto de entrada para execução local
+    
     app = create_app()
     
-    # Inicializa o banco de dados caso não exista o arquivo .db
+    
     db_path = app.config['DATABASE']
     if not os.path.exists(db_path):
         print("Banco de dados não encontrado localmente. Inicializando banco...")
         init_db(app)
         print("Banco de dados inicializado com sucesso!")
         
-    # Inicializa o servidor local com o modo Debug habilitado
+    
     app.run(debug=True, host='127.0.0.1', port=5000)

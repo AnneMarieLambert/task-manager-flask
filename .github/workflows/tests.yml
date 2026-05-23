@@ -1,6 +1,6 @@
 name: Execução de Testes Automatizados (CI)
 
-# Define as regras de disparo do pipeline no GitHub
+
 on:
   push:
     branches: [ main, master ]
@@ -12,24 +12,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. Realiza o checkout do repositório no agente do GitHub
+
     - name: Checkout do Código
       uses: actions/checkout@v3
 
-    # 2. Configura a versão do Python desejada para execução
+
     - name: Configurar Python 3.11
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-        cache: 'pip' # Otimiza o cache das dependências do pip
+        cache: 'pip' 
 
-    # 3. Instala as dependências listadas no requirements.txt
+    
     - name: Instalar Dependências
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    # 4. Executa a suíte de testes com Pytest
+    
     - name: Executar Testes com Pytest
       run: |
         pytest -v

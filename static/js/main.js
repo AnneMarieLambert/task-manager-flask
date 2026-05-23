@@ -1,12 +1,7 @@
-/**
- * ==========================================================================
- * SISTEMA DE GERENCIAMENTO DE TAREFAS - JAVASCRIPT AUXILIAR
- * Utilitários de comportamento e micro-animações do lado do cliente.
- * ==========================================================================
- */
+
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Fechamento automático e efeito fade-out nos alertas Flash
+    
     const flashAlerts = document.querySelectorAll('.alert');
     if (flashAlerts.length > 0) {
         flashAlerts.forEach(alert => {
@@ -24,15 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Confirmação personalizada para Exclusão de Tarefas
+    
     const deleteForms = document.querySelectorAll('form[action*="/task/delete/"]');
     deleteForms.forEach(form => {
         form.addEventListener('submit', (e) => {
-            // Exibe janela de confirmação nativa (didática e infalível)
+            
             const confirmDelete = confirm('Tem certeza absoluta de que deseja excluir permanentemente esta tarefa? Esta ação é irreversível.');
             
             if (!confirmDelete) {
-                // Impede o envio do formulário caso o usuário cancele
+                
                 e.preventDefault();
             }
         });
@@ -42,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskCards = document.querySelectorAll('.task-card');
     taskCards.forEach(card => {
         card.addEventListener('mouseenter', () => {
-            // Leve balanço na entrada
+            
             card.style.transition = 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)';
         });
     });

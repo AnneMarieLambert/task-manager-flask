@@ -1,6 +1,3 @@
-# Documentação Técnica do Projeto (Engenharia de Software)
-
-Este documento reúne a fundamentação teórica de Engenharia de Software aplicada no desenvolvimento do sistema **KanbanTasker**, detalhando a especificação de requisitos, a arquitetura do software e as decisões de engenharia ágil adotadas.
 
 ---
 
