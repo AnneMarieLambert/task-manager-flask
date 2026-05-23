@@ -4,12 +4,12 @@ Este projeto é um sistema web acadêmico de gerenciamento de tarefas estruturad
 
 ---
 
-## 🎯 Objetivo do Projeto
+##  Objetivo do Projeto
 O objetivo do KanbanTasker é prover uma ferramenta simples, didática e de alta qualidade visual para simular o ciclo de vida de tarefas em um fluxo ágil de desenvolvimento. Ele serve como entrega acadêmica modelo, demonstrando boas práticas de modularização de código, design limpo, cobertura de testes funcionais e conceitos práticos de gerenciamento ágil.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 *   **Linguagem**: Python (versão >= 3.10)
 *   **Framework Web**: Flask (padrão Application Factory)
 *   **Banco de Dados**: SQLite3 (nativo do Python, sem ORMs para fins de clareza didática)
@@ -21,7 +21,7 @@ O objetivo do KanbanTasker é prover uma ferramenta simples, didática e de alta
 
 ---
 
-## 📐 Estrutura Organizacional do Projeto
+##  Estrutura Organizacional do Projeto
 O projeto foi estruturado seguindo os padrões profissionais da Engenharia de Software, organizando as responsabilidades de forma clara e limpa:
 
 ```text
@@ -61,7 +61,7 @@ task-manager-flask/
 
 ---
 
-## 📈 Metodologia Ágil Utilizada (Kanban)
+##  Metodologia Ágil Utilizada (Kanban)
 O sistema foi projetado especificamente para espelhar a metodologia ágil **Kanban**, amplamente adotada em equipes de desenvolvimento modernas devido à sua flexibilidade. 
 
 O quadro visual é dividido nas três colunas essenciais:
@@ -73,7 +73,7 @@ A equipe simulou o backlog de desenvolvimento do próprio projeto sob a forma de
 
 ---
 
-## 🔄 Mudança de Escopo: Prioridade das Tarefas
+##  Mudança de Escopo: Prioridade das Tarefas
 Durante as reuniões de planejamento ágil no decorrer do ciclo de desenvolvimento, a equipe identificou a necessidade crítica de sinalizar a criticidade de cada atividade diretamente no quadro visual para que os desenvolvedores pudessem focar primeiro em tarefas bloqueantes ou urgentes.
 
 Dessa forma, foi aprovada uma **Mudança de Escopo oficial** para incorporar a funcionalidade de **Prioridade das Tarefas**:
@@ -93,7 +93,7 @@ A aplicação funciona como um sistema completo de gerenciamento de tarefas (CRU
 
 ---
 
-## 🚀 Como Executar o Projeto Localmente
+##  Como Executar o Projeto Localmente
 
 ### Pré-requisitos
 *   Python 3.10 ou superior instalado em seu sistema operacional.
@@ -135,7 +135,7 @@ A aplicação funciona como um sistema completo de gerenciamento de tarefas (CRU
 
 ---
 
-## 🧪 Como Executar os Testes Automatizados
+##  Como Executar os Testes Automatizados
 Os testes foram estruturados de forma isolada usando **Pytest** e utilizam um banco de dados físico temporário em disco que é destruído logo após a finalização da execução, não alterando seus dados locais reais.
 
 Para rodar os testes, garanta que seu ambiente virtual esteja ativo e execute:
@@ -147,7 +147,7 @@ Isso rodará toda a suíte de testes de rotas, CRUD e validações de dados pres
 
 ---
 
-## 🤖 Integração Contínua (GitHub Actions)
+##  Integração Contínua (GitHub Actions)
 Este projeto conta com um fluxo de **Integração Contínua (CI)** totalmente configurado no arquivo [tests.yml](file:///C:/Users/user/.gemini/antigravity/scratch/task-manager-flask/.github/workflows/tests.yml).
 
 Sempre que a equipe submete um novo commit ou abre uma solicitação de mesclagem (Pull Request) nas branches de produção (`main`/`master`), os servidores do GitHub realizam de forma 100% autônoma as seguintes etapas:
