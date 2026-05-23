@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gestão Ágil{% endblock %} - Kanban Tasker</title>
+    
+    <!-- Metas de SEO Básicos -->
+    <meta name="description" content="Um sistema web simples de gerenciamento de tarefas utilizando metodologia ágil Kanban. Desenvolvido para a disciplina de Engenharia de Software.">
+    <meta name="author" content="Trabalho Acadêmico de Engenharia de Software">
+    
+    <!-- Folha de Estilo Principal -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Cabeçalho & Barra de Navegação -->
+    <header>
+        <nav class="navbar" id="main-nav">
+            <a href="{{ url_for('index') }}" class="nav-brand" id="brand-logo">
+                <span>📋</span> KanbanTasker
+            </a>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="btn btn-secondary btn-sm" id="btn-nav-dashboard">
+                    Dashboard Kanban
+                </a>
+                <a href="{{ url_for('create') }}" class="btn btn-primary btn-sm" id="btn-nav-new-task">
+                    + Nova Tarefa
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-container">
+        
+        <!-- Renderização de Mensagens Flash (Alertas de Sucesso/Erro) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}" id="alert-{{ loop.index }}">
+                            {% if category == 'success' %}
+                                <span>✅</span>
+                            {% elif category == 'danger' %}
+                                <span>❌</span>
+                            {% else %}
+                                <span>ℹ️</span>
+                            {% endif %}
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Bloco Dinâmico Injetado pelas Telas Filhas -->
+        {% block content %}{% endblock %}
+
+    </main>
+
+    <!-- Rodapé Acadêmico -->
+    <footer>
+        <p>© 2026 - Trabalho Acadêmico de Engenharia de Software. Desenvolvido em Flask e SQLite.</p>
+        <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.75rem;">Metodologia Ágil (Kanban) • Testado com Pytest • CI por GitHub Actions</p>
+    </footer>
+
+    <!-- Scripts Auxiliares -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

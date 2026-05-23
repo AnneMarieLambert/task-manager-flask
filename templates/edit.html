@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Tarefa #{{ task['id'] }}{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h2 class="form-title">Editar Tarefa #{{ task['id'] }}</h2>
+    
+    <form action="{{ url_for('edit', id=task['id']) }}" method="POST" id="edit-task-form">
+        <!-- Campo: Título -->
+        <div class="form-group">
+            <label for="title" class="form-label">Título da Tarefa *</label>
+            <input 
+                type="text" 
+                name="title" 
+                id="title" 
+                class="form-control" 
+                value="{{ task['title'] }}" 
+                required 
+                autofocus
+            >
+        </div>
+        
+        <!-- Campo: Descrição -->
+        <div class="form-group">
+            <label for="description" class="form-label">Descrição / Critérios de Aceite</label>
+            <textarea 
+                name="description" 
+                id="description" 
+                class="form-control"
+            >{{ task['description'] }}</textarea>
+        </div>
+        
+        <!-- Grid de Configurações da Metodologia -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <!-- Campo: Prioridade -->
+            <div class="form-group">
+                <label for="priority" class="form-label">Prioridade</label>
+                <select name="priority" id="priority" class="form-control">
+                    <option value="Baixa" {% if task['priority'] == 'Baixa' %}selected{% endif %}>🟢 Baixa</option>
+                    <option value="Média" {% if task['priority'] == 'Média' %}selected{% endif %}>🟡 Média</option>
+                    <option value="Alta" {% if task['priority'] == 'Alta' %}selected{% endif %}>🔴 Alta</option>
+                </select>
+            </div>
+            
+            <!-- Campo: Status -->
+            <div class="form-group">
+                <label for="status" class="form-label">Status no Kanban</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="A Fazer" {% if task['status'] == 'A Fazer' %}selected{% endif %}>📋 A Fazer</option>
+                    <option value="Em Progresso" {% if task['status'] == 'Em Progresso' %}selected{% endif %}>🚀 Em Progresso</option>
+                    <option value="Concluído" {% if task['status'] == 'Concluído' %}selected{% endif %}>🎯 Concluído</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Ações do Formulário -->
+        <div class="form-actions">
+            <a href="{{ url_for('index') }}" class="btn btn-secondary" id="btn-cancel-edit">
+                Cancelar
+            </a>
+            <button type="submit" class="btn btn-primary" id="btn-submit-edit">
+                Atualizar Tarefa
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard Kanban{% endblock %}
+
+{% block content %}
+<div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <div>
+        <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">Quadro Kanban</h1>
+        <p style="color: var(--text-secondary);">Visualize e altere o fluxo de trabalho da sua equipe em tempo real.</p>
+    </div>
+    <div>
+        <a href="{{ url_for('create') }}" class="btn btn-primary" id="btn-create-task-main">
+            <span>+</span> Adicionar Tarefa
+        </a>
+    </div>
+</div>
+
+<!-- Grid Kanban com 3 colunas padrão da metodologia ágil -->
+<div class="kanban-board" id="kanban-board-container">
+
+    <!-- COLUNA: A FAZER -->
+    <div class="kanban-column col-todo" id="column-todo">
+        <div class="column-header">
+            <div class="column-title">
+                <span class="column-indicator"></span>
+                A Fazer
+            </div>
+            <span class="task-count" id="count-todo">{{ kanban['A Fazer']|length }}</span>
+        </div>
+        <div class="task-list" id="list-todo">
+            {% if kanban['A Fazer'] %}
+                {% for task in kanban['A Fazer'] %}
+                    <div class="task-card priority-{{ task['priority']|lower }}" id="task-card-{{ task['id'] }}">
+                        <div class="task-card-header">
+                            <span class="badge badge-{{ task['priority']|lower }}">{{ task['priority'] }}</span>
+                            <span class="task-date">{{ task['created_at'].split(' ')[0] }}</span>
+                        </div>
+                        <h3 class="task-title">{{ task['title'] }}</h3>
+                        {% if task['description'] %}
+                            <p class="task-description">{{ task['description'] }}</p>
+                        {% endif %}
+                        <div class="task-card-footer">
+                            <div class="task-actions">
+                                <!-- Botão Rápido para Mover para Concluído -->
+                                <form action="{{ url_for('toggle', id=task['id']) }}" method="POST" style="display: inline;">
+                                    <button type="submit" class="action-btn" title="Marcar como Concluída" id="btn-toggle-{{ task['id'] }}">
+                                        ⭕ Marcar Concluída
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="task-actions">
+                                <a href="{{ url_for('edit', id=task['id']) }}" class="action-btn" title="Editar Tarefa" id="btn-edit-{{ task['id'] }}">
+                                    ✏️
+                                </a>
+                                <form action="{{ url_for('delete', id=task['id']) }}" method="POST" style="display: inline;">
+                                    <button type="submit" class="action-btn btn-delete-task" title="Excluir Tarefa" id="btn-delete-{{ task['id'] }}">
+                                        🗑️
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <span>💤</span>
+                    Sem tarefas pendentes
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- COLUNA: EM PROGRESSO -->
+    <div class="kanban-column col-progress" id="column-progress">
+        <div class="column-header">
+            <div class="column-title">
+                <span class="column-indicator"></span>
+                Em Progresso
+            </div>
+            <span class="task-count" id="count-progress">{{ kanban['Em Progresso']|length }}</span>
+        </div>
+        <div class="task-list" id="list-progress">
+            {% if kanban['Em Progresso'] %}
+                {% for task in kanban['Em Progresso'] %}
+                    <div class="task-card priority-{{ task['priority']|lower }}" id="task-card-{{ task['id'] }}">
+                        <div class="task-card-header">
+                            <span class="badge badge-{{ task['priority']|lower }}">{{ task['priority'] }}</span>
+                            <span class="task-date">{{ task['created_at'].split(' ')[0] }}</span>
+                        </div>
+                        <h3 class="task-title">{{ task['title'] }}</h3>
+                        {% if task['description'] %}
+                            <p class="task-description">{{ task['description'] }}</p>
+                        {% endif %}
+                        <div class="task-card-footer">
+                            <div class="task-actions">
+                                <!-- Botão Rápido para Mover para Concluído -->
+                                <form action="{{ url_for('toggle', id=task['id']) }}" method="POST" style="display: inline;">
+                                    <button type="submit" class="action-btn" title="Marcar como Concluída" id="btn-toggle-{{ task['id'] }}">
+                                        ⭕ Marcar Concluída
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="task-actions">
+                                <a href="{{ url_for('edit', id=task['id']) }}" class="action-btn" title="Editar Tarefa" id="btn-edit-{{ task['id'] }}">
+                                    ✏️
+                                </a>
+                                <form action="{{ url_for('delete', id=task['id']) }}" method="POST" style="display: inline;">
+                                    <button type="submit" class="action-btn btn-delete-task" title="Excluir Tarefa" id="btn-delete-{{ task['id'] }}">
+                                        🗑️
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <span>🚀</span>
+                    Nenhuma em andamento
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- COLUNA: CONCLUÍDO -->
+    <div class="kanban-column col-done" id="column-done">
+        <div class="column-header">
+            <div class="column-title">
+                <span class="column-indicator"></span>
+                Concluído
+            </div>
+            <span class="task-count" id="count-done">{{ kanban['Concluído']|length }}</span>
+        </div>
+        <div class="task-list" id="list-done">
+            {% if kanban['Concluído'] %}
+                {% for task in kanban['Concluído'] %}
+                    <div class="task-card priority-{{ task['priority']|lower }}" id="task-card-{{ task['id'] }}">
+                        <div class="task-card-header">
+                            <span class="badge badge-{{ task['priority']|lower }}">{{ task['priority'] }}</span>
+                            <span class="task-date">{{ task['created_at'].split(' ')[0] }}</span>
+                        </div>
+                        <h3 class="task-title">{{ task['title'] }}</h3>
+                        {% if task['description'] %}
+                            <p class="task-description">{{ task['description'] }}</p>
+                        {% endif %}
+                        <div class="task-card-footer">
+                            <div class="task-actions">
+                                <!-- Botão Rápido para Mover para Pendente (Reabrir) -->
+                                <form action="{{ url_for('toggle', id=task['id']) }}" method="POST" style="display: inline;">
+                                    <button type="submit" class="action-btn" style="color: var(--color-done);" title="Reabrir Tarefa" id="btn-toggle-{{ task['id'] }}">
+                                        ✅ Concluída (Reabrir)
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="task-actions">
+                                <a href="{{ url_for('edit', id=task['id']) }}" class="action-btn" title="Editar Tarefa" id="btn-edit-{{ task['id'] }}">
+                                    ✏️
+                                </a>
+                                <form action="{{ url_for('delete', id=task['id']) }}" method="POST" style="display: inline;">
+                                    <button type="submit" class="action-btn btn-delete-task" title="Excluir Tarefa" id="btn-delete-{{ task['id'] }}">
+                                        🗑️
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <span>🎯</span>
+                    Foco no objetivo!
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
